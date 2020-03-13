@@ -143,11 +143,11 @@ class ListaDePostagem
         $xCol5  = $xCol4 + $wCol4 + $space;
         $wCol5  = $space * 2;
         $xCol6  = $xCol5 + $wCol5 + $space;
-        $wCol6  = $space * 2;
+        $wCol6  = $space * 5;
         $xCol7  = $xCol6 + $wCol6 + $space;
-        $wCol7  = $space * 11;
+        $wCol7  = $space * 15;
         $xCol8  = $xCol7 + $wCol7 + $space;
-        $wCol8  = $space * 8;
+        $wCol8  = $space * 12;
         $xCol9  = $xCol8 + $wCol8 + $space;
         $wCol9  = $space * 6;
         $xCol10 = $xCol9 + $wCol9 + $space;
@@ -290,7 +290,7 @@ class ListaDePostagem
      * @param $xCol10
      * @param $wCol10
      */
-    private function writeListHeader($pdf, $xCol1, $y2, $wCol1, $xCol2, $wCol2, $xCol3, $wCol3, $xCol4, $wCol4, $xCol5, $wCol5, $xCol6, $wCol6, $xCol7, $y1, $wCol7, $xCol8, $wCol8, $xCol9, $wCol9, $xCol10, $wCol10)
+    private function writeListHeader($pdf, $xCol1, $y2, $wCol1, $xCol2, $wCol2, $xCol3, $wCol3, $xCol4, $wCol4, $xCol5, $wCol5, $xCol6, $wCol6, $xCol7, $y1, $wCol7, $xCol8, $wCol8, $xCol9, $wCol9)
     {
         $pdf->SetFont('Courier', 'B', 8);
         $pdf->SetXY($xCol1, $y2);
@@ -305,14 +305,12 @@ class ListaDePostagem
         $pdf->CellXp($wCol5, 'MP', 'C');
         $pdf->SetX($xCol6);
         $pdf->CellXp($wCol6, 'VD', 'C');
-        $pdf->SetXY($xCol7, $y1);
-        $pdf->MultiCellXp($wCol7, 'Valor declarado', null, 0, 'C');
-        $pdf->SetXY($xCol8, $y1);
-        $pdf->MultiCellXp($wCol8, 'Nota fiscal', null, 0, 'C');
-        $pdf->SetXY($xCol9, $y2);
+        $pdf->SetX($xCol7);
+        $pdf->CellXp($wCol7, 'Valor declarado','C');
+        $pdf->SetX($xCol8);
+        $pdf->CellXp($wCol8, 'Nota fiscal', 'C');
+        $pdf->SetX($xCol9);
         $pdf->CellXp($wCol9, 'Volume', 'C');
-        $pdf->SetX($xCol10);
-        $pdf->CellXp($wCol10, 'Destinatário', 'C');
     }
 
     /**
@@ -377,15 +375,13 @@ class ListaDePostagem
                     $xCol8,
                     $wCol8,
                     $xCol9,
-                    $wCol9,
-                    $xCol10,
-                    $wCol10
+                    $wCol9
                 );
                 $pdf->SetFont('Courier', '', 8);
             }
 
-            $y1 += $lineHeigth;
-            $y2 += $lineHeigth;
+            $y1 += 2*$lineHeigth;
+            $y2 += 2*$lineHeigth;
             $pdf->SetY($y1);
 
             $temAr          = false;
@@ -407,7 +403,7 @@ class ListaDePostagem
                 $fc = 225;
                 $pdf->SetFillColor($fc, $fc, $fc);
                 $pdf->SetXY($xCol1, $y2);
-                $pdf->Cell($pdf->w - $pdf->rMargin - $pdf->lMargin, $lineHeigth, '', 0, 0, '', true);
+                $pdf->Cell($pdf->w - $pdf->rMargin - $pdf->lMargin, 2*$lineHeigth, '', 0, 0, '', true);
             }
 
             $pdf->SetXY($xCol1, $y2);
@@ -437,8 +433,8 @@ class ListaDePostagem
             $pdf->MultiCellXp($wCol7, ($temVd ? $valorDeclarado : ''), null, 0, 'C');
             $pdf->SetXY($xCol9, $y2);
             $pdf->CellXp($wCol9, '1/1', 'C');
-            $pdf->SetX($xCol10);
-            $pdf->CellXp($wCol10, $objetoPostal->getDestinatario()->getNome(), 'C');
+            $pdf->SetXY($xCol4, $y2+$lineHeigth);
+            $pdf->CellXp($wCol4, "Destinatário: ".$objetoPostal->getDestinatario()->getNome(), 'C');
         }
     }
 
