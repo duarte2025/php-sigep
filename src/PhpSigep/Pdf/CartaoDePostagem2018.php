@@ -629,14 +629,14 @@ class CartaoDePostagem2018
             $this->pdf->SetFont('', 'B');
             $this->setFillColor(60, 60, 60);
             $this->pdf->SetFontSize(10);
-            $this->pdf->SetXY(2, $t);
-            $this->t($w, $titulo, 2, '');
+            //$this->pdf->SetXY(2, $t);
+            //$this->t($w, $titulo, 2, '');
 
             // Nome da pessoa
             $this->pdf->SetFont('', '', 10);
             $this->setFillColor(190, 190, 190);
-            $this->pdf->SetXY(22, $t);
-            $this->multiLines($w, trim($nomeDestinatario), 'L');
+            $this->pdf->SetXY(2, $t);
+            $this->multiLines($w, trim($titulo.' '.$nomeDestinatario), 'L');
         }
 
         $w = $w - $addressPadding;
@@ -655,13 +655,10 @@ class CartaoDePostagem2018
         }
         $this->setFillColor(100, 190, 190);
         $this->pdf->SetX($l);
-        $this->multiLines($w, $address1, 'L');
+        $this->multiLines($w, $address1, '');
 
         //Segunda parte do endereco
-        $this->pdf->SetX($l);
-
-        $this->setFillColor(100, 130, 190);
-        $this->multiLines($w, $complemento . $bairro, 'L');
+        //$this->pdf->SetX($l);
 
         $this->setFillColor(100, 30, 210);
         $this->pdf->SetX($l);
