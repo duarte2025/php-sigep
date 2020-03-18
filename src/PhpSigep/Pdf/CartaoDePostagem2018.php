@@ -284,7 +284,7 @@ class CartaoDePostagem2018
             $this->pdf->SetFont('');
 
             // Peso
-            $this->pdf->SetXY(81, 31);
+            $this->pdf->SetXY(79, 31);
             $this->t(15, 'Peso (g):', 1, 'L', null);
             $this->pdf->SetFont('', 'B');
             $this->pdf->SetXY(95, 31);
@@ -295,7 +295,7 @@ class CartaoDePostagem2018
             $Yetiqueta = $this->pdf->GetY() + 1;
             $this->setFillColor(100, 100, 200);
             $this->pdf->SetXY(0, $Yetiqueta);
-            $this->pdf->SetFontSize(11);
+            $this->pdf->SetFontSize(9);
             $this->pdf->SetFont('', 'B');
             $etiquetaComDv = $objetoPostal->getEtiqueta()->getEtiquetaComDv();
             $etiquetaFormatada = substr($etiquetaComDv, 0, 2) . ' '
@@ -602,7 +602,7 @@ class CartaoDePostagem2018
             $this->pdf->Rect(0, $t, 36, 5, 'F');
 
             $this->pdf->SetFont('', 'B');
-            $this->pdf->SetFontSize(11);
+            $this->pdf->SetFontSize(10);
             $this->pdf->SetTextColor(255,255,255);
             $this->pdf->SetXY($l + 3, $t);
             $this->t($w, $titulo, 2, '');
@@ -612,7 +612,7 @@ class CartaoDePostagem2018
             $this->pdf->Image(realpath(dirname(__FILE__)) . '/logo-correios.png', 84, $t+1, 20, 4);
 
             // Nome da pessoa
-            $this->pdf->SetFont('', '', 11);
+            $this->pdf->SetFont('', '', 9);
             $this->setFillColor(190, 190, 190);
             $this->pdf->SetX($l + $addressPadding);
             $this->multiLines($w, $nomeDestinatario, 'L');
@@ -633,7 +633,7 @@ class CartaoDePostagem2018
             //$this->t($w, $titulo, 2, '');
 
             // Nome da pessoa
-            $this->pdf->SetFont('', '', 10);
+            $this->pdf->SetFont('', '', 8);
             $this->setFillColor(190, 190, 190);
             $this->pdf->SetXY(2, $t);
             $this->multiLines($w, trim($titulo.' '.$nomeDestinatario), 'L');
