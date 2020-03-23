@@ -104,14 +104,15 @@ class ListaDePostagem
 
         $pdf->setLineHeightPadding(50 / $k);
         $this->labeledText($pdf, 'Nº da lista:', $this->idPlpCorreios, $wHeaderCols);
-        $this->labeledText($pdf, 'Cliente:', $remetente->getNome(), $wHeaderCols, 1);
+        $this->labeledText($pdf, 'Cliente:', $remetente->getNome(), $wHeaderCols*2, 1);
         $this->labeledText($pdf, 'Contrato:', $plp->getAccessData()->getNumeroContrato(), $wHeaderCols);
         $this->labeledText($pdf, 'Cod. adm.:', $plp->getAccessData()->getCodAdministrativo(), $wHeaderCols);
         $this->labeledText($pdf, 'Cartão:', $plp->getAccessData()->getCartaoPostagem(), $wHeaderCols, 1);
-        $this->labeledText($pdf, 'Remetente:', $remetente->getNome(), $wHeaderCols, 1);
+        $this->labeledText($pdf, 'Remetente:', $remetente->getNome(), $wHeaderCols*2, 1);
         $this->labeledText($pdf, 'Telefone:', $remetente->getTelefone(), $wHeaderCols, 1);
+
         $yAboveFone = $pdf->y;
-        $pdf->y -= ($pdf->getLineHeigth() * 2);
+        $pdf->y -= ($pdf->getLineHeigth());
         $pdf->x += $wHeaderCols;
         $this->labeledText($pdf, 'Endereço:', $remeAddress, $wHeaderCols * 2, 1, 16 / $k);
         $yAboveAddress = $pdf->y;
