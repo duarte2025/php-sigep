@@ -126,8 +126,8 @@ class AvisoRecebimento{
         //Label sigep
         $this->pdf->SetXY($wLogo, $y+2);
         $this->pdf->SetFont('', 'B', 17);
-        $wLabelSigep = ($wInner * 11) / 100;
-        $this->pdf->CellXp($wLabelSigep, 'SIGEP', 'L', 0, null, 0);
+        $wLabelSigep = ($wInner * 20) / 100;
+        $this->pdf->CellXp($wLabelSigep, 'POSTAGEM', 'L', 0, null, 0);
         
         //Label aviso de recebimento
         $this->pdf->SetXY($this->pdf->x, $y+1);
