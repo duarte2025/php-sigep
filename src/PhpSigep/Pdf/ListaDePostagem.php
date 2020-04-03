@@ -57,6 +57,10 @@ class ListaDePostagem
             $this->writeList();
             $pdf->Ln();
             $pdf->Ln();
+
+            $pdf->x = 10;
+            $pdf->y = 10;
+            
             $this->writeBottom();
             $this->writeFooter();
 
