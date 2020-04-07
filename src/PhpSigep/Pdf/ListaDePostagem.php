@@ -57,10 +57,6 @@ class ListaDePostagem
             $this->writeList();
             $pdf->Ln();
             $pdf->Ln();
-
-            $pdf->x = 10;
-            $pdf->y = 10;
-            
             $this->writeBottom();
             $this->writeFooter();
 
@@ -353,7 +349,7 @@ class ListaDePostagem
 
         $i = 1;
         $pdf->SetFont('Courier', '', 8);
-        foreach ($objetoPostais as $objetoPostal) {
+        foreach ($objetoPostais as $key => $objetoPostal) {
             if ($y1 > $pdf->h - $pdf->tMargin - $pdf->bMargin) {
                 $this->addPage();
                 $i  = 1;
@@ -385,8 +381,8 @@ class ListaDePostagem
                 $pdf->SetFont('Courier', '', 8);
             }
 
-            $y1 += 2*$lineHeigth;
-            $y2 += 2*$lineHeigth;
+            $y1 += 3*$lineHeigth;
+            $y2 += 3*$lineHeigth;
             $pdf->SetY($y1);
 
             $temAr          = false;
@@ -408,7 +404,7 @@ class ListaDePostagem
                 $fc = 225;
                 $pdf->SetFillColor($fc, $fc, $fc);
                 $pdf->SetXY($xCol1, $y2);
-                $pdf->Cell($pdf->w - $pdf->rMargin - $pdf->lMargin, 2*$lineHeigth, '', 0, 0, '', true);
+                $pdf->Cell($pdf->w - $pdf->rMargin - $pdf->lMargin, 3*$lineHeigth, '', 0, 0, '', true);
             }
 
             $pdf->SetXY($xCol1, $y2);
@@ -418,6 +414,7 @@ class ListaDePostagem
             } else {
                 $etiquetaComDv = '';
             }
+            $etiquetaComDv = $xCol1;
             $pdf->CellXp($wCol1, $etiquetaComDv);
             $destino = $objetoPostal->getDestino();
             if ($destino instanceof \PhpSigep\Model\DestinoNacional) {
@@ -438,8 +435,13 @@ class ListaDePostagem
             $pdf->MultiCellXp($wCol7, ($temVd ? $valorDeclarado : ''), null, 0, 'C');
             $pdf->SetXY($xCol9, $y2);
             $pdf->CellXp($wCol9, '1/1', 'C');
-            $pdf->SetXY($xCol4, $y2+$lineHeigth);
-            $pdf->CellXp($wCol4, "Destinatário: ".$objetoPostal->getDestinatario()->getNome(), 'C');
+            $pdf->SetXY($xCol1, $y2 + $lineHeigth);
+            $destinatario = "Destinatário: ".$objetoPostal->getDestinatario()->getNome();
+            $pdf->CellXp($wCol4*strlen($destinatario)/2, $destinatario, 'C');
+            $pdf->SetXY($xCol1, $y2 + 2*$lineHeigth);
+            $observ = "Declaração de conteúdo: ".$objetoPostal->getObservacao();
+            $pdf->CellXp((strlen($observ)*$wCol4)/2, $observ, 'C');
+
         }
     }
 
