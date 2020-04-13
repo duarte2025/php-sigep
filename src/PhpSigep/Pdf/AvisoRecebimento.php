@@ -80,7 +80,7 @@ class AvisoRecebimento{
             $yContent = $this->pdf->y;
             
             $this->writeContentDescription($objetoPostal, $xContent, $yContent, $wInner, $wCol1);
-            $this->writeDeclarationOfContent($xContent, $wCol1);
+            $this->writeDeclarationOfContent($xContent, $wCol1,$observ = "Declaração de conteúdo: ".$objetoPostal->getObservacao());
 
             $yEndDeclarationOfContent = $this->pdf->y;
             $this->writeDeliveryAttempts($xContent+$wCol1, $yContent, $wInner, $wCol2, $yEndDeclarationOfContent);
@@ -214,13 +214,13 @@ class AvisoRecebimento{
         
     }
     
-    private function writeDeclarationOfContent($x, $wContentInner){
+    private function writeDeclarationOfContent($x, $wContentInner, $observ){
        
         $yHeaderRect = $this->pdf->y;
 
         $this->pdf->SetXY($x, $yHeaderRect);
         $this->pdf->SetFont('', '', 5);
-        $this->pdf->CellXp($wContentInner, 'DECLARAÇÃO DE CONTEÚDO', 'L', 2, null, 0);
+        $this->pdf->CellXp($wContentInner, $observ, 'L', 2, null, 0);
         $this->ln(5);
         
         $this->pdf->Rect($x, $yHeaderRect, $wContentInner, $this->pdf->y - $yHeaderRect, 'S');
