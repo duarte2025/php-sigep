@@ -219,7 +219,7 @@ class AvisoRecebimento{
         $yHeaderRect = $this->pdf->y;
 
         $this->pdf->SetXY($x, $yHeaderRect);
-        $this->pdf->SetFont('', '', 5);
+        $this->pdf->SetFont('', '', 7);
         $this->pdf->CellXp($wContentInner, $observ, 'L', 2, null, 0);
         $this->ln(5);
         
