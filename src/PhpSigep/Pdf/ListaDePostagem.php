@@ -296,11 +296,11 @@ class ListaDePostagem
      * @param $xCol10
      * @param $wCol10
      */
-    private function writeListHeader($pdf, $xCol1, $y2, $wCol1, $xCol2, $wCol2, $xCol3, $wCol3, $xCol4, $wCol4, $xCol5, $wCol5, $xCol6, $wCol6, $xCol7, $y1, $wCol7, $xCol8, $wCol8, $xCol9, $wCol9)
+    private function writeListHeader($pdf, $xCol1, $y2, $wCol1, $xCol2, $wCol2, $xCol3, $wCol3, $xCol4, $wCol4, $xCol5, $wCol5, $xCol6, $wCol6, $xCol7, $y1, $wCol7, $xCol8, $wCol8, $xCol9, $wCol9, $xCol10, $wCol10)
     {
         $pdf->SetFont('Courier', 'B', 8);
         $pdf->SetXY($xCol1, $y2);
-        $pdf->CellXp($wCol1, 'Nº do objeto');
+        $pdf->CellXp($wCol1, 'Cod. Rastreamento');
         $pdf->SetX($xCol2);
         $pdf->CellXp($wCol2, 'CEP', 'C');
         $pdf->SetX($xCol3);
@@ -382,6 +382,8 @@ class ListaDePostagem
                     $wCol8,
                     $xCol9,
                     $wCol9
+                    ,$xCol10,
+                    $wCol10
                 );
                 $pdf->SetFont('Courier', '', 8);
             }
@@ -419,7 +421,6 @@ class ListaDePostagem
             } else {
                 $etiquetaComDv = '';
             }
-            $etiquetaComDv = $xCol1;
             $pdf->CellXp($wCol1, $etiquetaComDv);
             $destino = $objetoPostal->getDestino();
             if ($destino instanceof \PhpSigep\Model\DestinoNacional) {
