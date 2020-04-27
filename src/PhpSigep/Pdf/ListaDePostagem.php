@@ -443,10 +443,10 @@ class ListaDePostagem
             $pdf->CellXp($wCol9, '1/1', 'C');
             $pdf->SetXY($xCol1, $y2 + $lineHeigth);
             $destinatario = "Destinatário: ".$objetoPostal->getDestinatario()->getNome();
-            $pdf->CellXp($wCol4*strlen($destinatario)/2, $destinatario, 'C');
+            $pdf->CellXp($wCol4*strlen($destinatario)/2, $destinatario);
             $pdf->SetXY($xCol1, $y2 + 2*$lineHeigth);
             $observ = "Declaração de conteúdo: ".$objetoPostal->getObservacao();
-            $pdf->CellXp((strlen($observ)*$wCol4)/2, $observ, 'C');
+            $pdf->CellXp((strlen($observ)*$wCol4)/2, $observ);
 
         }
     }
