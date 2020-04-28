@@ -198,7 +198,7 @@ class AvisoRecebimento{
         $this->pdf->SetFont('', 'B', 8);
         $this->pdf->CellXp(19, 'REMETENTE: ', 'L', 2, null, 0);
         $this->pdf->SetFont('', '', 7);
-        $this->pdf->CellXp($wContentInner, $remetente->getNome(), 'L', 2, null, 0);
+        $this->pdf->MultiCellXp($wContentInner, $remetente->getNome(), null, 0, 'L');
         $this->pdf->SetX($x);
         $this->pdf->SetFont('', 'B', 8);
         $this->ln(1);
