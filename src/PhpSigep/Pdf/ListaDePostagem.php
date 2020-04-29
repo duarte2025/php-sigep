@@ -387,9 +387,11 @@ class ListaDePostagem
                 );
                 $pdf->SetFont('Courier', '', 8);
             }
+            $destinatario = "Destinatário: ".$objetoPostal->getDestinatario()->getNome();
+            $tam = 3 + (strlen($destinatario)/111 > 1);
 
-            $y1 += 3*$lineHeigth;
-            $y2 += 3*$lineHeigth;
+            $y1 += $tam*$lineHeigth;
+            $y2 += $tam*$lineHeigth;
             $pdf->SetY($y1);
 
             $temAr          = false;
@@ -411,7 +413,7 @@ class ListaDePostagem
                 $fc = 225;
                 $pdf->SetFillColor($fc, $fc, $fc);
                 $pdf->SetXY($xCol1, $y2);
-                $pdf->Cell($pdf->w - $pdf->rMargin - $pdf->lMargin, 3*$lineHeigth, '', 0, 0, '', true);
+                $pdf->Cell($pdf->w - $pdf->rMargin - $pdf->lMargin, $tam*$lineHeigth, '', 0, 0, '', true);
             }
 
             $pdf->SetXY($xCol1, $y2);
@@ -442,9 +444,8 @@ class ListaDePostagem
             $pdf->SetXY($xCol9, $y2);
             $pdf->CellXp($wCol9, '1/1', 'C');
             $pdf->SetXY($xCol1, $y2 + $lineHeigth);
-            $destinatario = "Destinatário: ".$objetoPostal->getDestinatario()->getNome();
-            $pdf->CellXp($wCol4*strlen($destinatario)/2, $destinatario);
-            $pdf->SetXY($xCol1, $y2 + 2*$lineHeigth);
+            $this->pdf->MultiCellXp($wCol4*111/2, $destinatario, null, 0, 'L');
+            $this->pdf->SetX($xCol1);
             $observ = "Declaração de conteúdo: ".$objetoPostal->getObservacao();
             $pdf->CellXp((strlen($observ)*$wCol4)/2, $observ);
 
