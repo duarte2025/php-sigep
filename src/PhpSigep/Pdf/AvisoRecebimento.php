@@ -172,8 +172,9 @@ class AvisoRecebimento{
         $this->pdf->CellXp($wContentInner, 'DESTINATÁRIO', 'L', 2, null, 0);
         $this->pdf->SetFont('', '', 7);
         //TODO pode quebrar linha usar MultiCellXp
-        $this->pdf->CellXp($wContentInner, $destinatario->getNome(), 'L', 2, null, 0);
-        $this->ln(1);
+        $this->pdf->MultiCellXp($wContentInner, $destinatario->getNome(), null, 0, 'L');
+        $this->pdf->SetX($x);
+
         $this->pdf->CellXp($wContentInner, $destinatario->getLogradouro().(($destinatario->getNumero())?','.$destinatario->getNumero():''), 'L', 2, null, 0);
         $this->pdf->CellXp($wContentInner, $destinatario->getComplemento().' - '.$destino->getBairro(), 'L', 2, null, 0);
         $this->pdf->CellXp($wContentInner, $destino->getCep().' '.$destino->getCidade().'-'.$destino->getUf(), 'L', 2, null, 0);
