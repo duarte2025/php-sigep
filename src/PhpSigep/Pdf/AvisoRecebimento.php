@@ -61,7 +61,7 @@ class AvisoRecebimento{
 
         foreach ($this->plp->getEncomendas() as $key => $objetoPostal) {
             
-            if($key > 0 && ($key) % 3 == 0){
+            if($key > 0 && ($key) % 2 == 0){
                 $this->addPage();
             }
             
