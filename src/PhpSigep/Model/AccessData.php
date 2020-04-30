@@ -49,7 +49,19 @@ class AccessData extends AbstractModel
      * @var Diretoria
      */
     protected $diretoria;
+    /**
+     * @var Cliente
+     */
+    protected $cliente;
 
+
+    /**
+     * @return string
+     */
+    public function getCliente()
+    {
+        return $this->cliente;
+    }
     /**
      * @return string
      */
@@ -74,6 +86,13 @@ class AccessData extends AbstractModel
         return $this->senha;
     }
 
+    /**
+     * @param string $cliente
+     */
+    public function setCliente($cliente)
+    {
+        $this->cliente = $cliente;
+    }
     /**
      * @param string $senha
      */

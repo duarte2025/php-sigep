@@ -93,6 +93,7 @@ class ListaDePostagem
         $plp         = $this->plp;
 
         $remetente = $plp->getRemetente();
+        $accesData = $plp->getAccessData();
 
         $remeAddress = $remetente->getLogradouro();
         $numero      = $remetente->getNumero();
@@ -109,7 +110,7 @@ class ListaDePostagem
 
         $pdf->setLineHeightPadding(50 / $k);
         $this->labeledText($pdf, 'Nº da lista:', $this->idPlpCorreios, $wHeaderCols);
-        $this->labeledText($pdf, 'Cliente:', $remetente->getNome(), $wHeaderCols*2, 1,16 / $k);
+        $this->labeledText($pdf, 'Cliente:', $accesData->getCliente(), $wHeaderCols*2, 1,16 / $k);
         $this->labeledText($pdf, 'Contrato:', $plp->getAccessData()->getNumeroContrato(), $wHeaderCols);
         $this->labeledText($pdf, 'Cod. adm.:', $plp->getAccessData()->getCodAdministrativo(), $wHeaderCols);
         $this->labeledText($pdf, 'Cartão:', $plp->getAccessData()->getCartaoPostagem(), $wHeaderCols, 1);
