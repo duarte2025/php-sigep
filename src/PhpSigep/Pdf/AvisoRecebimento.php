@@ -61,7 +61,7 @@ class AvisoRecebimento{
 
         foreach ($this->plp->getEncomendas() as $key => $objetoPostal) {
             
-            if($key > 0 && ($key) % 2 == 0){
+            if($key > 0 && ($key) % 3 == 0){
                 $this->addPage();
             }
             
@@ -80,7 +80,7 @@ class AvisoRecebimento{
             $yContent = $this->pdf->y;
             
             $this->writeContentDescription($objetoPostal, $xContent, $yContent, $wInner, $wCol1);
-            $this->writeDeclarationOfContent($xContent, $wCol1,$observ = "Declaração de conteúdo: ".$objetoPostal->getObservacao());
+            $this->writeDeclarationOfContent($xContent, $wCol1);
 
             $yEndDeclarationOfContent = $this->pdf->y;
             $this->writeDeliveryAttempts($xContent+$wCol1, $yContent, $wInner, $wCol2, $yEndDeclarationOfContent);
@@ -126,8 +126,8 @@ class AvisoRecebimento{
         //Label sigep
         $this->pdf->SetXY($wLogo, $y+2);
         $this->pdf->SetFont('', 'B', 17);
-        $wLabelSigep = ($wInner * 20) / 100;
-        $this->pdf->CellXp($wLabelSigep, 'POSTAGEM', 'L', 0, null, 0);
+        $wLabelSigep = ($wInner * 11) / 100;
+        $this->pdf->CellXp($wLabelSigep, 'SIGEP', 'L', 0, null, 0);
         
         //Label aviso de recebimento
         $this->pdf->SetXY($this->pdf->x, $y+1);
@@ -172,9 +172,8 @@ class AvisoRecebimento{
         $this->pdf->CellXp($wContentInner, 'DESTINATÁRIO', 'L', 2, null, 0);
         $this->pdf->SetFont('', '', 7);
         //TODO pode quebrar linha usar MultiCellXp
-        $this->pdf->MultiCellXp($wContentInner, $destinatario->getNome(), null, 0, 'L');
-        $this->pdf->SetX($x);
-
+        $this->pdf->CellXp($wContentInner, $destinatario->getNome(), 'L', 2, null, 0);
+        $this->ln(1);
         $this->pdf->CellXp($wContentInner, $destinatario->getLogradouro().(($destinatario->getNumero())?','.$destinatario->getNumero():''), 'L', 2, null, 0);
         $this->pdf->CellXp($wContentInner, $destinatario->getComplemento().' - '.$destino->getBairro(), 'L', 2, null, 0);
         $this->pdf->CellXp($wContentInner, $destino->getCep().' '.$destino->getCidade().'-'.$destino->getUf(), 'L', 2, null, 0);
@@ -197,9 +196,9 @@ class AvisoRecebimento{
         
         //remetente
         $this->pdf->SetFont('', 'B', 8);
-        $this->pdf->CellXp(19, 'REMETENTE: ', 'L', 2, null, 0);
+        $this->pdf->CellXp(19, 'REMETENTE: ', 'L', 0, null, 0);
         $this->pdf->SetFont('', '', 7);
-        $this->pdf->MultiCellXp($wContentInner, $remetente->getNome(), null, 0, 'L');
+        $this->pdf->CellXp($wContentInner, $remetente->getNome(), 'L', 2, null, 0);
         $this->pdf->SetX($x);
         $this->pdf->SetFont('', 'B', 8);
         $this->ln(1);
@@ -215,13 +214,13 @@ class AvisoRecebimento{
         
     }
     
-    private function writeDeclarationOfContent($x, $wContentInner, $observ){
+    private function writeDeclarationOfContent($x, $wContentInner){
        
         $yHeaderRect = $this->pdf->y;
 
         $this->pdf->SetXY($x, $yHeaderRect);
-        $this->pdf->SetFont('', '', 7);
-        $this->pdf->CellXp($wContentInner, $observ, 'L', 2, null, 0);
+        $this->pdf->SetFont('', '', 5);
+        $this->pdf->CellXp($wContentInner, 'DECLARAÇÃO DE CONTEÚDO', 'L', 2, null, 0);
         $this->ln(5);
         
         $this->pdf->Rect($x, $yHeaderRect, $wContentInner, $this->pdf->y - $yHeaderRect, 'S');
